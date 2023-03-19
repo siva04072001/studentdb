@@ -1,0 +1,65 @@
+{% extends 'info/tbase.html' %}
+    {% load static %}
+
+    {% block content %}
+    <div class="conatiner-fluid content-inner mt-n5 py-0">
+      <div class="row">
+         <div class="col-sm-12">
+            <div class="card">
+               <div class="card-header d-flex justify-content-between">
+                  <div class="header-title">
+                     <h4 class="card-title">List of Classes</h4>
+                  </div>
+               </div>
+               <div class="card-body p-0">
+                  <div class="table-responsive mt-4">
+                     <table id="basic-table" class="table table-bordered table-striped mb-0" role="grid">
+                        <thead>
+                           <tr>
+                            <th>Class</th>
+                            <th>Course</th>
+                            <th></th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                            {% for ass in teacher1.assign_set.all %}
+                              <td>
+                                 <div class="d-flex align-items-center">
+                                    <h6>{{ ass.class_id }}</h6>
+                                 </div>
+                              </td>
+                              <td>
+                                <div class="d-flex align-items-center">
+                                   <h6>{{ ass.course }}</h6>
+                                </div>
+                             </td>
+                             <td>
+                              {% if choice == 1 %}
+                                  <a class="btn btn-primary" href="{% url 't_class_date' ass.id %}" role="button">Enter Attendance</a>
+                                  <a class="btn btn-warning" href="{% url 't_extra_class' ass.id %}">Extra Class</a>
+                                  <a class="btn btn-danger" href="{% url 't_student' ass.id %}">View Students</a>
+  
+                              {% elif choice == 2 %}
+                                  <a class="btn btn-primary" href="{% url 't_marks_list' ass.id %}" role="button">Enter Marks</a>
+                                  <a class="btn btn-danger" href="{% url 't_student_marks' ass.id %}">View Students</a>
+                              {% elif choice == 3 %}
+                                  <a class="btn btn-danger" href="{% url 't_report' ass.id %}">Generate reports</a>
+                              {% endif %}
+  
+                          </td>
+                           </tr>
+                           {% empty %}
+                            <p>teacher has no courses</p>
+                    {% endfor %}
+                       </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+    </div>
+
+    {% endblock %}
+

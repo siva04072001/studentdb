@@ -1,0 +1,66 @@
+{% extends 'info/tbase.html' %}
+{% block content %}
+
+<form action="{% url 'confirm' assc.id %}" method="post">
+            {% csrf_token %}
+            <div class="conatiner-fluid content-inner mt-n5 py-0">
+              <div class="row">
+                 <div class="col-sm-12">
+                    <div class="card">
+                       <div class="card-header d-flex justify-content-between">
+                          <div class="header-title">
+                             <h4 class="card-title">Edit Attendance</h4>
+                          </div>
+                       </div>
+                       <div class="card-body p-0">
+                          <div class="table-responsive mt-4">
+                             <table id="basic-table" class="table table-bordered table-striped mb-0" role="grid">
+                              <thead>
+                                <tr>
+                                    <th>STUDENT NAME</th>
+                                    <th class="text-center">PRESENT</th>
+                                    <th class="text-center">ABSENT</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                <tbody>
+                    {% for att in att_list %}
+                    <tr>
+                    <td>{{att.student.name}}</td>
+                    
+                        
+
+                                {% if att.status %}
+                                <td class="text-center">
+                                  <input type="radio" name="{{ att.student.USN }}" id="option1" autocomplete="off" value="present" checked> Present </td>
+                                  <td class="text-center">
+                                    <input type="radio" name="{{ att.student.USN }}" id="option2" autocomplete="off" value="absent"> Absent</td>
+                                    {% else %}
+                                    <td class="text-center">
+                                      <input type="radio" name="{{ att.student.USN }}" id="option1" autocomplete="off" value="present"> Present </td>
+                                      <td class="text-center">
+                                        <input type="radio" name="{{ att.student.USN }}" id="option2" autocomplete="off" value="absent" checked> Absent</td>
+                                    {% endif %}
+                        
+                    
+                    </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+              <br>
+              <div class="text-center">
+                <input class="btn btn-primary" type="submit" value="Submit">
+              </div>
+              <br>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+</div>
+
+
+</form>
+
+{% endblock %}

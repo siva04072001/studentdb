@@ -1,0 +1,56 @@
+{% extends 'info/base.html' %}
+    {% load static %}
+
+    {% block content %}
+    <div class="conatiner-fluid content-inner mt-n5 py-0">
+      <div class="row">
+         <div class="col-sm-12">
+            <div class="card">
+               <div class="card-header d-flex justify-content-between">
+                  <div class="header-title">
+                     <h4 class="card-title">Marks</h4>
+                  </div>
+               </div>
+               <div class="card-body p-0">
+                  <div class="table-responsive mt-4">
+                     <table id="basic-table" class="table table-bordered table-striped mb-0" role="grid">
+                        <thead>
+                           <tr>
+                            <th>Course ID</th>
+                            <th>Course name</th>
+                            <th>Internals 1</th>
+                            <th>Internals 2</th>
+                            <th>Internals 3</th>
+                            <th>Improvement 1</th>
+                            <th>Improvement 2</th>
+                            <th>Semester</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                            {% for sc in sc_list %}
+                            <td>{{ sc.course_id }}</td>
+                              <td>
+                                 <div class="d-flex align-items-center">
+                                    <h6>{{sc.course.name}}</h6>
+                                 </div>
+                              </td>
+                              {% for m in sc.marks_set.all %}
+                            <td>{{ m.marks1 }}</td>
+                        {% endfor %}
+                              
+                           </tr>
+                           {% empty %}
+                            <p>student has no courses</p>
+                    {% endfor %}
+                       </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+    </div>
+
+    {% endblock %}
+

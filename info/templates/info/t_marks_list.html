@@ -1,0 +1,51 @@
+{% extends 'info/tbase.html' %}
+
+{% block content %}
+<div class="conatiner-fluid content-inner mt-n5 py-0">
+  <div class="row">
+     <div class="col-sm-12">
+        <div class="card">
+           <div class="card-header d-flex justify-content-between">
+              <div class="header-title">
+                 <h4 class="card-title">Marks</h4>
+              </div>
+           </div>
+           <div class="card-body p-0">
+              <div class="table-responsive mt-4">
+                 <table id="basic-table" class="table table-bordered table-striped mb-0" role="grid">
+                  <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for m in m_list %}
+                    <tr>
+                        <td>{{ m.name }}</td>
+                        {% if not m.status %}
+                            <td class="p-3 mb-2 bg-danger text-white">Not Marked</td>
+                            <td>
+                                <a class="btn btn-primary" href="{% url 't_marks_entry' m.id %}" role="button">Enter Marks</a>
+                            </td>
+
+                        {% else %}
+                            <td class="p-3 mb-2 bg-success text-white">Marked</td>
+                            <td><a class="btn btn-warning" href="{% url 'edit_marks' m.id %}" role="button">Edit Marks</a> </td>
+                        {% endif %}
+                    </tr>
+                    {% empty %}
+                            <p>student has no courses</p>
+                    {% endfor %}
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+         </div>
+      </div>
+   </div>
+ </div>
+
+{% endblock %}

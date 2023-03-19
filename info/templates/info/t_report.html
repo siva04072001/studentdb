@@ -1,0 +1,62 @@
+{% extends 'info/tbase.html' %}
+    {% load static %}
+
+    {% block content %}
+    <div class="conatiner-fluid content-inner mt-n5 py-0">
+      <div class="row">
+         <div class="col-sm-12">
+            <div class="card">
+               <div class="card-header d-flex justify-content-between">
+                  <div class="header-title">
+                     <h4 class="card-title">Report Details</h4>
+                  </div>
+               </div>
+               <div class="card-body p-0">
+                  <div class="table-responsive mt-4">
+                     <table id="basic-table" class="table table-bordered table-striped mb-0" role="grid">
+                        <thead>
+                           <tr>
+                            <th style="width: 25%">Student USN</th>
+                            <th style="width: 25%">Student Name</th>
+                            <th style="width: 25%">Attendance</th>
+                            <th style="width: 25%">CIE</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                            {% for sc in sc_list %}
+                              <td>
+                                 <div class="d-flex align-items-center">
+                                    <h6>{{ sc.student_id }}</h6>
+                                 </div>
+                              </td>
+                              <td>
+                                <div class="d-flex align-items-center">
+                                   <h6>{{ sc.student.name }}</h6>
+                                </div>
+                             </td>
+                             {% if sc.get_attendance < 75 %}
+                            <td class="p-3 mb-2 bg-danger text-white">{{ sc.get_attendance }}</td>
+                        {% else %}
+                            <td class="p-3 mb-2 bg-success text-white">{{ sc.get_attendance }}</td>
+                        {% endif %}
+                        {% if sc.get_cie < 25 %}
+                            <td class="p-3 mb-2 bg-danger text-white">{{ sc.get_cie }}</td>
+                        {% else %}
+                            <td class="p-3 mb-2 bg-success text-white">{{ sc.get_cie }}</td>
+                        {% endif %}
+                    </tr>
+                    {% empty %}
+                            <p>student has no courses</p>
+                    {% endfor %}
+                       </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+    </div>
+
+    {% endblock %}
+

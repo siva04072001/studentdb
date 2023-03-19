@@ -1,0 +1,65 @@
+{% extends 'info/tbase.html' %}
+{% block content %}
+{% if c.student_set.all %}
+<form action="{% url 'e_confirm' ass.id %}" method="post">
+  {% csrf_token %}
+<div class="conatiner-fluid content-inner mt-n5 py-0">
+  <div class="row">
+      <div class="col-sm-12">
+          <div class="card">
+              <div class="card-header d-flex justify-content-between flex-wrap">
+                  <div class="header-title">
+                      <h4 class="card-title mb-0">Attendance for Extra Classes</h4>
+                  </div>
+                  <div class="">
+                      <div class="form-group row">
+                        
+                          <label class="control-label col-sm-4 align-self-center " for="date">Date:</label>
+                          <div class="col-sm-8">
+                            <input type="date" name="date" class="form-control">
+                          </div>
+                      </div>
+                      
+                  </div>
+              </div>
+              <div class="card-body">
+                  <div class="table-responsive">
+                      <table class="table table-bordered table-striped mb-0" role="grid">
+                          <thead>
+                              <tr>
+                                  <th>STUDENT NAME</th>
+                                  <th class="text-center">PRESENT</th>
+                                  <th class="text-center">ABSENT</th>
+                                  
+                              </tr>
+                          </thead>
+                          <tbody>
+                {% for s in c.student_set.all %}
+                    <tr>
+                    <td>{{s.name}}</td>
+                      <td class="text-center">
+                        <input type="radio" name="{{ s.USN }}" id="option1" autocomplete="off" value="present" checked> Present </td>
+                        <td class="text-center">
+                          <input type="radio" name="{{ s.USN }}" id="option2" autocomplete="off" value="absent"> Absent</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+              </table> <br>
+              <div class="text-center">
+                <input class="btn btn-primary" type="submit" value="Submit">
+              </div>
+              <br>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+</form>
+
+
+{% else %}
+    <p>No students in Class</p>
+{% endif %}
+
+{% endblock %}

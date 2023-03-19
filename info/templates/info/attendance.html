@@ -1,0 +1,62 @@
+{% extends 'info/base.html' %}
+    {% load static %}
+
+    {% block content %}
+    <div class="conatiner-fluid content-inner mt-n5 py-0">
+      <div class="row">
+         <div class="col-sm-12">
+            <div class="card">
+               <div class="card-header d-flex justify-content-between">
+                  <div class="header-title">
+                     <h4 class="card-title">General Attendance</h4>
+                  </div>
+               </div>
+               <div class="card-body p-0">
+                  <div class="table-responsive mt-4">
+                     <table id="basic-table" class="table table-bordered table-striped mb-0" role="grid">
+                        <thead>
+                           <tr>
+                              <th>Course ID</th>
+                              <th>Course Name</th>
+                              <th>Attended Classes</th>
+                              <th>Total classes</th>
+                              <th>Attendance %</th>
+                              <th>Class to Attend</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                            {% for a in att_list %}
+                              <td>
+                                 <div class="d-flex align-items-center">
+                                    <h6>{{ a.course_id }}</h6>
+                                 </div>
+                              </td>
+                              <td>
+                                <a href="#" class="iq-media-1">
+                                  <div class="icon iq-icon-box-3"><a href="{% url 'attendance_detail' a.student.USN a.course.id %}">{{a.course.name}}</a></div>
+                                </a>
+                              </td>
+                              <td>{{ a.att_class }}</td>
+                              <td><div class="text-info">{{ a.total_class }}</div></td>
+                              {% if a.attendance < 75 %}
+                              <td class="p-3 mb-2 bg-danger text-white">{{ a.attendance }}</td>
+                              {% else %}
+                              <td class="p-3 mb-2 bg-success text-white">{{ a.attendance }}</td>
+                              {% endif %}
+                              <td>{{ a.classes_to_attend }}</td>
+                           </tr>
+                           {% empty %}
+                            <p>student has no courses</p>
+                    {% endfor %}
+                       </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+    </div>
+
+    {% endblock %}
+

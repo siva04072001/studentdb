@@ -1,0 +1,58 @@
+{% extends 'info/base.html' %}
+
+    {% block content %}
+    <div class="conatiner-fluid content-inner mt-n5 py-0">
+        <div class="row">
+           <div class="col-sm-12">
+              <div class="card">
+                 <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                       <h4 class="card-title">Time Table</h4>
+                    </div>
+                 </div>
+                 <div class="card-body p-0">
+                    <div class="table-responsive mt-4">
+                       <table id="basic-table" class="table table-bordered table-striped mb-0" role="grid">
+                        <thead class="cf">
+                            <tr>
+                                <th>      </th>
+                                <th>7:30 - 8:30</th>
+                                <th>8:30 - 9:30</th>
+                                <th>9:30 - 10:30</th>
+                                <th>Break</th>
+                                <th>11:00 - 11:50</th>
+                                <th>11:50 - 12:40</th>
+                                <th>12:40 - 1:30</th>
+                                <th>Lunch</th>
+                                <th>2:30 - 3:30</th>
+                                <th>3:30 - 4:30</th>
+                                <th>4:30 - 5:30</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in matrix %}
+                            <tr>{% for j in i %}
+                                {% if forloop.counter == 1 %}
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <b><h6>{{ j }}</h6></b>
+                                        </div>
+                                    </td>
+                                        {% else %}
+                                    <td>{{ j }}</td>
+                                    {% endif %}
+                                {% endfor %}
+                                    
+                                                                        
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                       </table>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+      </div>
+    {% endblock %}
